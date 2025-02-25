@@ -29,6 +29,7 @@ struct Detector {
   bool close, detected;
   void is_close(const Player& player);
   void is_detected(const Player& player);
+  void dot_product(const Player& player);
 };
 
 #endif

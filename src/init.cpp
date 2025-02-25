@@ -14,8 +14,8 @@ void Run::init() {
 
 void Run::update() {
   detector.update(player);
-  d2.update(player);
-  d3.update(player);
+  // d2.update(player);
+  // d3.update(player);
   player.update();
 }
 
@@ -45,13 +45,13 @@ void Run::render() {
   SDL_RenderClear(renderer);
 
   detector.draw(renderer);
-  d2.draw(renderer);
-  d3.draw(renderer);
+  // d2.draw(renderer);
+  // d3.draw(renderer);
 
   if (debug) {
     detector.draw_view(renderer);
-    d2.draw_view(renderer);
-    d3.draw_view(renderer);
+    // d2.draw_view(renderer);
+    // d3.draw_view(renderer);
   }
 
   player.draw(renderer);

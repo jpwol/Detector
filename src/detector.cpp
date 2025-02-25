@@ -12,7 +12,7 @@ void Detector::draw_view(SDL_Renderer* renderer) {
   else
     SDL_SetRenderDrawColor(renderer, 100, 255, 100, 255);
 
-  // DrawCircle(renderer, x, y, range);
+  DrawCircle(renderer, x, y, range);
 
   double start_x, start_y, end_x, end_y;
 
@@ -40,24 +40,24 @@ void Detector::update(const Player& player) {
   if (view >= 360.0) view = 0.0;
   if (view < 0) view = 360.0;
 
-  is_close(player);
-  is_detected(player);
-
+  // is_close(player);
+  // is_detected(player);
+  dot_product(player);
   // Handle turning input
   const Uint8* state = SDL_GetKeyboardState(NULL);
   if (state[SDL_SCANCODE_Q]) view += 0.01;
   if (state[SDL_SCANCODE_E]) view -= 0.01;
 
-  if (!detected) {
-    view += 0.01;
-  } else if (detected) {
-    Vec2f distance = Vec2f(player.x - x, player.y - y);
-    double angle =
-        fmod(atan2(distance.y, distance.x) * 180 / M_PI * -1 + 360.0, 360.0);
-    view = angle;
-    // x += distance.x / distance.w * 0.05;
-    // y += distance.y / distance.w * 0.05;
-  }
+  // if (!detected) {
+  //   view += 0.01;
+  // } else if (detected) {
+  //   Vec2f distance = Vec2f(player.x - x, player.y - y);
+  //   double angle =
+  //       fmod(atan2(distance.y, distance.x) * 180 / M_PI * -1 + 360.0, 360.0);
+  //   view = angle;
+  // x += distance.x / distance.w * 0.05;
+  // y += distance.y / distance.w * 0.05;
+  // }
 }
 
 void Detector::is_close(const Player& player) {
@@ -84,4 +84,16 @@ void Detector::is_detected(const Player& player) {
   } else {
     detected = false;
   }
+}
+
+void Detector::dot_product(const Player& player) {
+  Vec2f distance = Vec2f(player.x - x, player.y - y);
+  // I think angle has to be normalized between -180 and -180
+  // right now it's between 0 and 360
+  double normal_view = fmod(view, 180.0);
+  double dot = (distance.x / distance.w) * cos(rad(normal_view)) +
+               (distance.y / distance.w) * sin(rad(normal_view));
+  printf("Dot product: %lf\n", dot);
+  printf("Normalized view: %lf\n", normal_view);
+  printf("\033[H \033[0J");
 }
