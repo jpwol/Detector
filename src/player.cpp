@@ -7,9 +7,23 @@ void Player::draw(SDL_Renderer* renderer) {
 }
 
 void Player::update() {
+  double dx = 0.0, dy = 0.0;
+
   const Uint8* state = SDL_GetKeyboardState(NULL);
-  if (state[SDL_SCANCODE_W]) y -= 0.05;
-  if (state[SDL_SCANCODE_A]) x -= 0.05;
-  if (state[SDL_SCANCODE_S]) y += 0.05;
-  if (state[SDL_SCANCODE_D]) x += 0.05;
+  if (state[SDL_SCANCODE_W]) dy -= 1.0;
+  if (state[SDL_SCANCODE_A]) dx -= 1.0;
+  if (state[SDL_SCANCODE_S]) dy += 1.0;
+  if (state[SDL_SCANCODE_D]) dx += 1.0;
+
+  if (dy != 0.0 || dx != 0.0) {
+    double len = sqrt(dx * dx + dy * dy);
+
+    if (len != 0) {
+      dx /= len;
+      dy /= len;
+    }
+
+    x += dx * speed;
+    y += dy * speed;
+  }
 }

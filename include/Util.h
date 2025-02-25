@@ -5,9 +5,6 @@
 
 #include <cmath>
 
-void DrawCircle(SDL_Renderer* renderer, int x, int y, int radius);
-double rad(double angle);
-
 struct Vec2f {
   double x, y;
   double w;
@@ -17,6 +14,13 @@ struct Vec2f {
     this->y = y;
     this->w = sqrt(x * x + y * y);
   }
+
+  void normalize();
 };
+
+void DrawCircle(SDL_Renderer* renderer, int x, int y, int radius);
+double rad(double angle);
+double ang(double rad);
+double dot(Vec2f& v1, Vec2f& v2);
 
 #endif

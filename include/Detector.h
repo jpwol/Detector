@@ -22,14 +22,14 @@ struct Detector {
   }
 
   void draw(SDL_Renderer* renderer);
-  void draw_view(SDL_Renderer* renderer);
-  void update(const Player& player);
+  void draw_view(SDL_Renderer* renderer, bool debug);
+  void update(const Player& player, bool debug);
 
  private:
   bool close, detected;
   void is_close(const Player& player);
   void is_detected(const Player& player);
-  void dot_product(const Player& player);
+  void is_detected_dot(const Player& player);
 };
 
 #endif

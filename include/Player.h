@@ -13,6 +13,9 @@ struct Player {
 
   void draw(SDL_Renderer* renderer);
   void update();
+
+ private:
+  double speed = 0.01;
 };
 
 #endif

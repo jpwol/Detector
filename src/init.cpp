@@ -9,13 +9,14 @@ void Run::init() {
   renderer = SDL_CreateRenderer(window, -1, 0);
 
   running = true;
+  show_view = false;
   debug = false;
 }
 
 void Run::update() {
-  detector.update(player);
-  // d2.update(player);
-  // d3.update(player);
+  detector.update(player, debug);
+  d2.update(player, debug);
+  d3.update(player, debug);
   player.update();
 }
 
@@ -28,8 +29,10 @@ void Run::handle_events() {
             running = false;
             break;
           case SDLK_TAB:
-            debug = !debug;
+            show_view = !show_view;
             break;
+          case SDLK_SPACE:
+            debug = !debug;
           default:
             break;
         }
@@ -45,13 +48,13 @@ void Run::render() {
   SDL_RenderClear(renderer);
 
   detector.draw(renderer);
-  // d2.draw(renderer);
-  // d3.draw(renderer);
+  d2.draw(renderer);
+  d3.draw(renderer);
 
-  if (debug) {
-    detector.draw_view(renderer);
-    // d2.draw_view(renderer);
-    // d3.draw_view(renderer);
+  if (show_view) {
+    detector.draw_view(renderer, debug);
+    d2.draw_view(renderer, debug);
+    d3.draw_view(renderer, debug);
   }
 
   player.draw(renderer);
