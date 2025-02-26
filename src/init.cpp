@@ -11,13 +11,14 @@ void Run::init() {
   running = true;
   show_view = false;
   debug = false;
+  AI = true;
 }
 
 void Run::update() {
   detector.update(player, debug);
   d2.update(player, debug);
   d3.update(player, debug);
-  player.update();
+  player.update(AI);
 }
 
 void Run::handle_events() {
@@ -33,6 +34,8 @@ void Run::handle_events() {
             break;
           case SDLK_SPACE:
             debug = !debug;
+          case SDLK_f:
+            AI = !AI;
           default:
             break;
         }

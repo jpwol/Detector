@@ -6,13 +6,28 @@ void Player::draw(SDL_Renderer* renderer) {
   SDL_RenderFillRect(renderer, &rect);
 }
 
-void Player::update() {
-  // const Uint8* state = SDL_GetKeyboardState(NULL);
-  // if (state[SDL_SCANCODE_W]) dy -= 1.0;
-  // if (state[SDL_SCANCODE_A]) dx -= 1.0;
-  // if (state[SDL_SCANCODE_S]) dy += 1.0;
-  // if (state[SDL_SCANCODE_D]) dx += 1.0;
-  move();
+void Player::update(bool AI) {
+  double dx = 0;
+  double dy = 0;
+
+  const Uint8* state = SDL_GetKeyboardState(NULL);
+  if (!AI) {
+    if (state[SDL_SCANCODE_W]) dy -= 1.0;
+    if (state[SDL_SCANCODE_A]) dx -= 1.0;
+    if (state[SDL_SCANCODE_S]) dy += 1.0;
+    if (state[SDL_SCANCODE_D]) dx += 1.0;
+
+    if (dx != 0 && dy != 0) {
+      double len = sqrt(dx * dx + dy * dy);
+      x += dx / len * speed;
+      y += dy / len * speed;
+    } else {
+      x += dx * speed;
+      y += dy * speed;
+    }
+  } else {
+    move();
+  }
 }
 
 void Player::move() {

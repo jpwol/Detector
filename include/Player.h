@@ -14,7 +14,7 @@ inline std::normal_distribution<float> dist(0.0, 0.01);
 
 struct Player {
  private:
-  double speed = 0.0055;
+  double speed = 0.01;
   Vec2f desiredDirection;
 
  public:
@@ -25,7 +25,7 @@ struct Player {
   }
 
   void draw(SDL_Renderer* renderer);
-  void update();
+  void update(bool AI);
   void move();
 };
 
