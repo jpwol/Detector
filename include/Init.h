@@ -6,8 +6,8 @@
 #include "Detector.h"
 #include "Player.h"
 
-#define SCREEN_WIDTH 800
-#define SCREEN_HEIGHT 600
+#define SCREEN_WIDTH 1200
+#define SCREEN_HEIGHT 800
 
 class Run {
  public:
@@ -29,8 +29,8 @@ class Run {
 
   Detector detector = Detector(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0.0);
   Detector d2 = Detector(100, 100, 180.0);
-  Detector d3 = Detector(600, 400, 90.0);
-  Player player = Player(30, 30);
+  Detector d3 = Detector(SCREEN_WIDTH - 100, SCREEN_HEIGHT - 100, 90.0);
+  Player player = Player(300, 300);
 };
 
 #endif

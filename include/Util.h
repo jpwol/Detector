@@ -9,6 +9,12 @@ struct Vec2f {
   double x, y;
   double w;
 
+  Vec2f() {
+    this->x = 0;
+    this->y = 0;
+    this->w = 0;
+  }
+
   Vec2f(double x, double y) {
     this->x = x;
     this->y = y;

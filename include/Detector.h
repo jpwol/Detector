@@ -10,7 +10,7 @@ struct Detector {
  public:
   double x, y;
   double view = 0.0;
-  const double fov = 45.0;
+  const double fov = 60.0;
   const double range = 100;
 
   Detector(double x, double y, double view) {

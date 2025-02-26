@@ -32,16 +32,17 @@ void Detector::draw_view(SDL_Renderer* renderer, bool debug) {
   SDL_RenderDrawLine(renderer, x, y, x + end_x, y - end_y);
 
   // Render face of cone
-  const int num_points = fov / 2 + 1;
-  SDL_Point* points = new SDL_Point[num_points];
-  for (int i = 0; i < num_points; i++) {
-    double angle = (view - fov / 2 + i * 2);
-    points[i].x = x + range * cos(rad(angle));
-    points[i].y = y + range * sin(rad(angle)) * -1;
-  }
-
-  SDL_RenderDrawLines(renderer, points, num_points);
-  delete[] (points);
+  //
+  // const int num_points = fov / 2 + 1;
+  // SDL_Point* points = new SDL_Point[num_points];
+  // for (int i = 0; i < num_points; i++) {
+  //   double angle = (view - fov / 2 + i * 2);
+  //   points[i].x = x + range * cos(rad(angle));
+  //   points[i].y = y + range * sin(rad(angle)) * -1;
+  // }
+  //
+  // SDL_RenderDrawLines(renderer, points, num_points);
+  // delete[] (points);
 }
 
 void Detector::update(const Player& player, bool debug) {
