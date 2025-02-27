@@ -27,6 +27,9 @@ class Run {
   bool show_view;
   bool debug;
   bool AI;
+  Uint64 now;
+  Uint64 last;
+  double deltaTime;
 
   Detector detector = Detector(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0.0);
   Detector d2 = Detector(100, 100, 180.0);

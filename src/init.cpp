@@ -8,6 +8,10 @@ void Run::init() {
 
   renderer = SDL_CreateRenderer(window, -1, 0);
 
+  now = SDL_GetPerformanceCounter();
+  last = 0;
+  deltaTime = 0;
+
   running = true;
   show_view = false;
   debug = false;
@@ -69,8 +73,15 @@ void Run::run() {
   init();
 
   while (running) {
+    last = now;
+    now = SDL_GetPerformanceCounter();
+    deltaTime = (double)(now - last) / SDL_GetPerformanceFrequency();
     handle_events();
     update();
     render();
+
+    printf("Frame Time: %.6f s (%.2f ms, %.2f FPS)\n", deltaTime,
+           deltaTime * 1000, 1.0 / deltaTime);
+    printf("\033[2J \033[H");
   }
 }
